@@ -1,4 +1,4 @@
-package com.louisgeek.checkappupdatelib;
+package com.louisgeek.checkappupdatebyfirim;
 
 import android.os.Environment;
 import android.util.Log;

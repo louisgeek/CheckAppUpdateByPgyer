@@ -204,7 +204,7 @@ public class DownloadFirmImApkTool {
         return jsonStr;
     }
 
-    // 获得存储卡的路径
+    // 获得存储卡的路径  返回外部存储空间路径（可能是sd卡，也可能是内部存储器）
     private static String sd_path = Environment.getExternalStorageDirectory() + File.separator;
     private static String sd_path_2_way = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
     private static String sd_path_3_way = Environment.getExternalStoragePublicDirectory("")+ File.separator;
