@@ -1,4 +1,4 @@
-package com.louisgeek.checkappupdatebyfirim.callback;
+package com.louisgeek.checkappupdatelib.callback;
 
 /**
  * Created by louisgeek on 2016/9/18.

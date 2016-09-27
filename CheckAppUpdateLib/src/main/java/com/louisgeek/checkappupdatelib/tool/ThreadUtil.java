@@ -1,4 +1,4 @@
-package com.louisgeek.checkappupdatebyfirim;
+package com.louisgeek.checkappupdatelib.tool;
 
 import android.os.Handler;
 import android.os.Looper;

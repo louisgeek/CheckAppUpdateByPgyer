@@ -8,9 +8,11 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
-import com.louisgeek.checkappupdatebyfirim.callback.CheckUpdateCallBack;
-import com.louisgeek.checkappupdatebyfirim.callback.DownloadApkCallBack;
-import com.louisgeek.checkappupdatebyfirim.callback.GetDownloadTokenCallBack;
+import com.louisgeek.checkappupdatelib.CheckUpdateTool;
+import com.louisgeek.checkappupdatelib.callback.CheckUpdateCallBack;
+import com.louisgeek.checkappupdatelib.callback.DownloadApkCallBack;
+import com.louisgeek.checkappupdatelib.callback.GetDownloadTokenCallBack;
+import com.louisgeek.checkappupdatelib.tool.SdCardTool;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -31,10 +33,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void OnSuccess(String result, int statusCode) {
                         if (statusCode == CheckUpdateTool.NEED_UPDATE_CODE) {
-                            DownloadFirmImApkTool.doGetDownloadToken(new GetDownloadTokenCallBack() {
+                            com.louisgeek.checkappupdatebyfirim.DownloadFirmImApkTool.doGetDownloadToken(new GetDownloadTokenCallBack() {
                                 @Override
                                 public void OnSuccess(String result, int statusCode) {
-                                    if (statusCode == DownloadFirmImApkTool.GET_DOWNLOAD_TOKEN_SUCCESS_CODE) {
+                                    if (statusCode == com.louisgeek.checkappupdatebyfirim.DownloadFirmImApkTool.GET_DOWNLOAD_TOKEN_SUCCESS_CODE) {
                                         String download_token = result;
 
                                         Log.i(TAG, "OnSuccess: download_token:" + download_token);
@@ -45,7 +47,11 @@ public class MainActivity extends AppCompatActivity {
                                         String baseDownloadAPKUrlPath = "http://download.fir.im/apps/%s/install?download_token=%s";
                                         String downloadAPKPathUrl = String.format(baseDownloadAPKUrlPath, CheckUpdateTool.ID_STR, download_token);
 
-                                        DownloadFirmImApkTool.doDownloadApk(downloadAPKPathUrl, new DownloadApkCallBack() {
+                                        if (!SdCardTool.hasSDCardMounted()){
+                                            Log.e(TAG, "OnSuccess:has NO SDCard Mounted");
+                                            return;
+                                        }
+                                        com.louisgeek.checkappupdatebyfirim.DownloadFirmImApkTool.doDownloadApk(downloadAPKPathUrl, new DownloadApkCallBack() {
                                             @Override
                                             public void OnSuccess(String result, int statusCode) {
 
@@ -53,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
 
                                             @Override
                                             public void OnSuccessNotifyUI(String result, int statusCode) {
-                                                if (statusCode == DownloadFirmImApkTool.DOWNLOAD_APK_SUCCESS_CODE) {
+                                                if (statusCode == com.louisgeek.checkappupdatebyfirim.DownloadFirmImApkTool.DOWNLOAD_APK_SUCCESS_CODE) {
                                                     //Toast.makeText(MainActivity.this, "下载完成", Toast.LENGTH_SHORT).show();
                                                     Log.i(TAG, "OnSuccessNotifyUI: 下载完成");
                                                     /*if (myDialogFragmentProgress != null) {
@@ -61,11 +67,11 @@ public class MainActivity extends AppCompatActivity {
                                                     }*/
                                                     final String apkPath = result;
                                                     //安装
-                                                    DownloadFirmImApkTool.installApk(mContext, apkPath);
+                                                    com.louisgeek.checkappupdatebyfirim.DownloadFirmImApkTool.installApk(mContext, apkPath);
                                                     myDialogFragmentProgress.setOnFinishClickListener(new MyDialogFragmentProgress.OnFinishClickListener() {
                                                         @Override
                                                         public void onFinishClick(View view) {
-                                                            DownloadFirmImApkTool.installApk(mContext, apkPath);
+                                                            com.louisgeek.checkappupdatebyfirim.DownloadFirmImApkTool.installApk(mContext, apkPath);
                                                         }
                                                     });
 
@@ -133,7 +139,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, statusCode + ":" + errorMsg, Toast.LENGTH_SHORT).show();
                     }
                 };
-                CheckUpdateTool.doCheckOnline(mContext, checkUpdateCallBack);
+                CheckUpdateTool.doCheckOnline(mContext, checkUpdateCallBack,true);
             }
         });
 

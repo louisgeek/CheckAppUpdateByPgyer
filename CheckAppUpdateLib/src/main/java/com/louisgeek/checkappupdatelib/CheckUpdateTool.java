@@ -1,11 +1,13 @@
-package com.louisgeek.checkappupdatebyfirim;
+package com.louisgeek.checkappupdatelib;
 
 import android.content.Context;
 import android.content.pm.PackageInfo;
 import android.content.pm.PackageManager;
 import android.util.Log;
 
-import com.louisgeek.checkappupdatebyfirim.callback.CheckUpdateCallBack;
+import com.louisgeek.checkappupdatelib.bean.FirImBean;
+import com.louisgeek.checkappupdatelib.callback.CheckUpdateCallBack;
+import com.louisgeek.checkappupdatelib.tool.ThreadUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,6 +27,7 @@ public class CheckUpdateTool {
     private static final String TAG = "CheckUpdateTool";
     public static final int NEED_UPDATE_CODE = 11;
     public static final int NO_NEED_UPDATE_CODE = 10;
+    public static final String TAG_RELEASE = "W3JlbGVhc2Vd";//[release]  base64  W3JlbGVhc2Vd
     public final static String ID_STR = "57d4ba0e959d6911010001a5";
     public final static String API_TOKEN = "b87f6759f2862d5d66605f66e186c3bb";
     private static String baseUrlByID = "http://api.fir.im/apps/latest/%s?api_token=%s";
@@ -35,9 +38,15 @@ public class CheckUpdateTool {
     private static String checkUpdateUrlByID = String.format(baseUrlByID, ID_STR, API_TOKEN);
     private static String checkUpdateUrlByPackageName = String.format(baseUrlByPackageName, packageName, API_TOKEN);
 
-    public static void doCheckOnline(final Context context, final CheckUpdateCallBack checkUpdateCallBack) {
-
-        Runnable runnable = new Runnable() {
+    /**
+     *
+     * @param context
+     * @param checkUpdateCallBack
+     * @param onlyCheckReleaseVersion 单纯检测正式版的apk  not debug
+     */
+    public static void doCheckOnline(final Context context, final CheckUpdateCallBack checkUpdateCallBack, final boolean onlyCheckReleaseVersion) {
+        Log.i(TAG, "doCheckOnline: 是否只检测正式版apk："+onlyCheckReleaseVersion);
+        final Runnable runnable = new Runnable() {
             @Override
             public void run() {
                 int code = -1;
@@ -51,13 +60,29 @@ public class CheckUpdateTool {
                         if (firImBean.getVersion() != null && !firImBean.getVersion().equals("")) {
                             int versionCode = Integer.parseInt(firImBean.getVersion());
                             boolean isNeed = isNeedUpdate(context, versionCode, firImBean.getVersionShort());
-                            Log.i(TAG, "doCheckOnline: isNeed:" + isNeed);
+                            String changelog = firImBean.getChangelog();
+                           // Log.i(TAG, "doCheckOnline: isNeed:" + isNeed);
+                            //
                             if (isNeed) {
-                                code = NEED_UPDATE_CODE;
-                                message = "需要更新";
+                                if (onlyCheckReleaseVersion) {
+                                    if (changelog.contains(TAG_RELEASE)) {
+                                        code = NEED_UPDATE_CODE;
+                                        message = "需要更新";
+                                        Log.i(TAG, "message3:正式版有更新");
+                                    } else {
+                                        code = NO_NEED_UPDATE_CODE;
+                                        message = "不需要更新";
+                                        Log.i(TAG, "message4:测试版有更新 正式版无更新");
+                                    }
+                                } else {
+                                    code = NEED_UPDATE_CODE;
+                                    message = "需要更新";
+                                    Log.i(TAG, "message2:正式版或测试版有更新");
+                                }
                             } else {
                                 code = NO_NEED_UPDATE_CODE;
                                 message = "不需要更新";
+                                Log.i(TAG, "message1:无更新");
                             }
                         } else {
                             code = -12;

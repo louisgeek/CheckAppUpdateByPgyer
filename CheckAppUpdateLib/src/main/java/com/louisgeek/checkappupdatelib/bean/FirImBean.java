@@ -1,4 +1,4 @@
-package com.louisgeek.checkappupdatebyfirim;
+package com.louisgeek.checkappupdatelib.bean;
 
 /**
  * Created by louisgeek on 2016/9/18.

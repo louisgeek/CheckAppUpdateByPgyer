@@ -6,8 +6,10 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
-import com.louisgeek.checkappupdatebyfirim.callback.DownloadApkCallBack;
-import com.louisgeek.checkappupdatebyfirim.callback.GetDownloadTokenCallBack;
+import com.louisgeek.checkappupdatelib.callback.DownloadApkCallBack;
+import com.louisgeek.checkappupdatelib.callback.GetDownloadTokenCallBack;
+import com.louisgeek.checkappupdatelib.CheckUpdateTool;
+import com.louisgeek.checkappupdatelib.tool.ThreadUtil;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -27,7 +29,6 @@ import java.net.URL;
  */
 public class DownloadFirmImApkTool {
 
-    static MyDialogFragmentProgress myDialogFragmentProgress;
     public static final int GET_DOWNLOAD_TOKEN_SUCCESS_CODE = 20;
     public static final int DOWNLOAD_APK_SUCCESS_CODE = 30;
 
@@ -204,8 +205,10 @@ public class DownloadFirmImApkTool {
     }
 
     // 获得存储卡的路径
-    private static String sd_path = Environment.getExternalStorageDirectory() + "/";
-    private static String filePath = sd_path + "MyFileDir/Test/";
+    private static String sd_path = Environment.getExternalStorageDirectory() + File.separator;
+    private static String sd_path_2_way = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
+    private static String sd_path_3_way = Environment.getExternalStoragePublicDirectory("")+ File.separator;
+    private static String filePath =String.format("%sMyFileDir%sTest%s",sd_path,File.separator,File.separator);
     private static String saveFileAllName = filePath + "app.apk";
 
     /**
@@ -214,6 +217,20 @@ public class DownloadFirmImApkTool {
      * @param pathurl
      */
     private static String getDownloadApk(String pathurl) {
+
+        /**
+         getDownloadApk: sd_path:/storage/emulated/0/
+         getDownloadApk: sd_path_2_way:/storage/emulated/0/
+         getDownloadApk: sd_path_3_way:/storage/emulated/0/
+         getDownloadApk: filePath:/storage/emulated/0/MyFileDir/Test/
+         getDownloadApk: saveFileAllName:/storage/emulated/0/MyFileDir/Test/app.apk
+         */
+        Log.i(TAG, "getDownloadApk: sd_path:"+sd_path);
+        Log.i(TAG, "getDownloadApk: sd_path_2_way:"+sd_path_2_way);
+        Log.i(TAG, "getDownloadApk: sd_path_3_way:"+sd_path_3_way);
+        Log.i(TAG, "getDownloadApk: filePath:"+filePath);
+        Log.i(TAG, "getDownloadApk: saveFileAllName:"+saveFileAllName);
+
         String apkPath = "";
         InputStream inputStream = null;
         FileOutputStream fileOutputStream = null;
@@ -246,16 +263,19 @@ public class DownloadFirmImApkTool {
 
             if (connection.getResponseCode() == 200) {
 
-                File file = new File(filePath);
+                File file_dir  = new File(filePath);
                 // 判断文件目录是否存在
-                if (!file.exists()) {
-                    file.mkdir();
+                if (!file_dir.exists()) {
+                    file_dir.mkdirs();
                 }
-                //file.mkdirs();
+                //file.mkdir();//只能生成单层目录
 
                 inputStream = connection.getInputStream();//会隐式调用connect()
 
                 File myFile = new File(saveFileAllName);
+                /*if (!myFile.exists()){
+                    myFile.mkdir();
+                }*/
                 //输出流
                 fileOutputStream = new FileOutputStream(myFile);
 
