@@ -1,4 +1,4 @@
-package com.louisgeek.checkappupdatebyfirim;
+package com.louisgeek.checkappupdatelib;
 
 import android.content.Context;
 import android.content.Intent;
@@ -8,7 +8,6 @@ import android.util.Log;
 
 import com.louisgeek.checkappupdatelib.callback.DownloadApkCallBack;
 import com.louisgeek.checkappupdatelib.callback.GetDownloadTokenCallBack;
-import com.louisgeek.checkappupdatelib.CheckUpdateTool;
 import com.louisgeek.checkappupdatelib.tool.ThreadUtil;
 
 import org.json.JSONException;

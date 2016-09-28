@@ -37,7 +37,7 @@ public class CheckUpdateTool {
     private static String baseUrlByPackageName = "http://api.fir.im/apps/latest/%s?api_token=%s&type=android";
     private static String checkUpdateUrlByID = String.format(baseUrlByID, ID_STR, API_TOKEN);
     private static String checkUpdateUrlByPackageName = String.format(baseUrlByPackageName, packageName, API_TOKEN);
-
+    private static FirImBean mFirImBean;
     /**
      *
      * @param context
@@ -55,12 +55,12 @@ public class CheckUpdateTool {
                 String json = checkUpdate();
                 Log.i(TAG, "doCheckOnline: json:" + json);
                 if (json != null && !json.equals("")) {
-                    FirImBean firImBean = parseFirImJson(json);
-                    if (firImBean != null) {
-                        if (firImBean.getVersion() != null && !firImBean.getVersion().equals("")) {
-                            int versionCode = Integer.parseInt(firImBean.getVersion());
-                            boolean isNeed = isNeedUpdate(context, versionCode, firImBean.getVersionShort());
-                            String changelog = firImBean.getChangelog();
+                    mFirImBean = parseFirImJson(json);
+                    if (mFirImBean != null) {
+                        if (mFirImBean.getVersion() != null && !mFirImBean.getVersion().equals("")) {
+                            int versionCode = Integer.parseInt(mFirImBean.getVersion());
+                            boolean isNeed = isNeedUpdate(context, versionCode, mFirImBean.getVersionShort());
+                            String changelog = mFirImBean.getChangelog();
                            // Log.i(TAG, "doCheckOnline: isNeed:" + isNeed);
                             //
                             if (isNeed) {
@@ -100,11 +100,11 @@ public class CheckUpdateTool {
                 final String finalMessage = message;
                 final int finalCode = code;
                 if (code > 0) {
-                    checkUpdateCallBack.OnSuccess(message, code);
+                    checkUpdateCallBack.OnSuccess(message, code,mFirImBean);
                     ThreadUtil.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            checkUpdateCallBack.OnSuccessNotifyUI(finalMessage, finalCode);
+                            checkUpdateCallBack.OnSuccessNotifyUI(finalMessage, finalCode,mFirImBean);
                         }
                     });
                 } else {

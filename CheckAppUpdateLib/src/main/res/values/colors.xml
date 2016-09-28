@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="click_text_color">#dd149E91</color>
+    <color name="click_bg_to_black">#22000000</color>
+</resources>
