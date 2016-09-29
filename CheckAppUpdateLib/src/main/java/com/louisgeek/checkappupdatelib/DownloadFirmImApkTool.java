@@ -1,8 +1,5 @@
 package com.louisgeek.checkappupdatelib;
 
-import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Environment;
 import android.util.Log;
 
@@ -437,17 +434,6 @@ public class DownloadFirmImApkTool {
 
     }
 
-    public static void installApk(Context context, String filePath) {
-        Intent intent = new Intent(Intent.ACTION_VIEW);
-        intent.setDataAndType(Uri.parse("file://" + filePath), "application/vnd.android.package-archive");
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        context.startActivity(intent);
-    }
 
-    public static void uninstallApk(Context context) {
-        Uri uri = Uri.parse("package:com.xxx.xxx");
-        Intent intent = new Intent(Intent.ACTION_DELETE, uri);
-        context.startActivity(intent);
-    }
 
 }

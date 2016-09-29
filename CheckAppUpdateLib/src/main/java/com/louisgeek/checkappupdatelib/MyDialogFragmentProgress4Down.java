@@ -43,7 +43,7 @@ public class MyDialogFragmentProgress4Down extends DialogFragment {
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.dialogfrag_content_progress, container, false);
+        View view = inflater.inflate(R.layout.dialogfrag_content_progress_4_down, container, false);
 
         mProgressBar = (ProgressBar) view.findViewById(R.id.id_pb);
         mProgressBar.setMax(100);

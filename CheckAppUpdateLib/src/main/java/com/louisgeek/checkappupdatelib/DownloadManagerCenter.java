@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.ServiceConnection;
 import android.os.IBinder;
+import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.util.Log;
 import android.widget.Toast;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.louisgeek.checkappupdatelib.bean.FirImBean;
 import com.louisgeek.checkappupdatelib.callback.CheckUpdateCallBack;
 import com.louisgeek.checkappupdatelib.callback.GetDownloadTokenCallBack;
+import com.louisgeek.checkappupdatelib.tool.AppTool;
 import com.louisgeek.checkappupdatelib.tool.SdCardTool;
 
 /**
@@ -24,18 +26,19 @@ public class DownloadManagerCenter {
     private static DownloadFileService mDownloadFileService;
     private static boolean mSilentDownload;
     private static Context mContext;
-    private static Class<?> mClazz;
+    //private static Class<?> mClazz;
     private static FragmentManager mFragmentManager;
-    public static void startDown(Context context,FragmentManager fragmentManager,Class<?> clazz){
-        startDown(context,fragmentManager,clazz,true,false);
+    public static void startDown(Context context){
+        startDown(context,true,false);
     }
-    public static void startDown(Context context,FragmentManager fragmentManager,Class<?> clazz,boolean onlyCheckReleaseVersion){
-        startDown(context,fragmentManager,clazz,onlyCheckReleaseVersion,false);
+    public static void startDown(Context context,boolean onlyCheckReleaseVersion){
+        startDown(context,onlyCheckReleaseVersion,false);
     }
-    public static void startDown(Context context,FragmentManager fragmentManager,Class<?> clazz,boolean onlyCheckReleaseVersion,boolean silentDownload){
+    public static void startDown(Context context,boolean onlyCheckReleaseVersion,boolean silentDownload){
         mContext=context;
-        mClazz=clazz;
-        mFragmentManager=fragmentManager;
+       // mClazz=clazz;
+        //！！！！！！！！！
+        mFragmentManager=((FragmentActivity)context).getSupportFragmentManager();
         //
         CheckUpdateCallBack checkUpdateCallBack = new CheckUpdateCallBack() {
             @Override
@@ -45,8 +48,10 @@ public class DownloadManagerCenter {
                     if (silentDownload) {
                         doGetDownCode(silentDownload);
                     } else {
+                        String changelog=firImBean.getChangelog();
+                        changelog=changelog.replace(CheckUpdateTool.TAG_RELEASE,"");
                         //
-                        MyDialogFragmentNormal myDialogFragmentNormal = MyDialogFragmentNormal.newInstance("有新的更新", "最新版本：" + firImBean.getVersionShort() + "\n\n" + "更新日志：" + firImBean.getChangelog());
+                        MyDialogFragmentNormal myDialogFragmentNormal = MyDialogFragmentNormal.newInstance("有新的更新", "最新版本：" + firImBean.getVersionShort() + "\n\n" +changelog);
                         myDialogFragmentNormal.setOnBtnClickListener(new MyDialogFragmentNormal.OnBtnClickListener() {
                             @Override
                             public void onOkBtnClick(DialogInterface dialog) {
@@ -147,7 +152,7 @@ public class DownloadManagerCenter {
 
         if (!mSilentDownload) {
             //
-            NotificationMangerCenter.initNotification(mContext,mClazz);
+            NotificationMangerCenter.initNotification(mContext);
         }
 
     }
@@ -182,8 +187,13 @@ public class DownloadManagerCenter {
                 public void onDownLoadComplete(final String apkPath) {
                     //下载完解除绑定
                     mContext.unbindService(mServiceConnection);
+
+                    if (!mSilentDownload) {
+                        //
+                        NotificationMangerCenter.updateNotificationClick(apkPath);
+                    }
                     //安装
-                    DownloadFirmImApkTool.installApk(mContext, apkPath);
+                    AppTool.installApk(mContext, apkPath);
                     //
                     if (!mSilentDownload && myDialogFragmentProgress4Down != null) {
                         myDialogFragmentProgress4Down.setMessageText("新版本下载完成");
@@ -191,7 +201,7 @@ public class DownloadManagerCenter {
                             @Override
                             public void finishDown() {
                                 //安装
-                                DownloadFirmImApkTool.installApk(mContext, apkPath);
+                                AppTool.installApk(mContext, apkPath);
                             }
                         });
                     }

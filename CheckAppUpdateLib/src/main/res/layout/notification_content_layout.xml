@@ -8,10 +8,10 @@
     >
     <ImageView
         android:id="@+id/content_view_image"
-        android:padding="5dp"
-        android:layout_width="48dp"
+        android:padding="10dp"
+        android:layout_width="64dp"
         android:layout_centerInParent="true"
-        android:layout_height="48dp"
+        android:layout_height="64dp"
         />
     <RelativeLayout
         android:orientation="vertical"
@@ -21,7 +21,7 @@
         android:id="@+id/content_view_text"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="我们"
+        android:text="准备下载中"
         android:textColor="#969191"
         android:padding="5dp"
         />

@@ -28,8 +28,8 @@ public class CheckUpdateTool {
     public static final int NEED_UPDATE_CODE = 11;
     public static final int NO_NEED_UPDATE_CODE = 10;
     public static final String TAG_RELEASE = "W3JlbGVhc2Vd";//[release]  base64  W3JlbGVhc2Vd
-    public final static String ID_STR = "57d4ba0e959d6911010001a5";
-    public final static String API_TOKEN = "b87f6759f2862d5d66605f66e186c3bb";
+    public final static String ID_STR = "xxxxxx";
+    public final static String API_TOKEN = "xxxxxxxxxxxxx";
     private static String baseUrlByID = "http://api.fir.im/apps/latest/%s?api_token=%s";
 
     private static String packageName = "com.sunstar.cloudseeds";
