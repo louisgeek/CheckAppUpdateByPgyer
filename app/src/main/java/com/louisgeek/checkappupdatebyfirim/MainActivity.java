@@ -22,7 +22,7 @@ public class MainActivity extends AppCompatActivity {
         idbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DownloadManagerCenter.startDown(MainActivity.this,getSupportFragmentManager(),MainActivity.class);
+                DownloadManagerCenter.startDown(MainActivity.this,getSupportFragmentManager(),MainActivity.class,false);
             }
         });
     }

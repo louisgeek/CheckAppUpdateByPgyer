@@ -147,7 +147,7 @@ public class DownloadManagerCenter {
 
         if (!mSilentDownload) {
             //
-            NotificationMangerCenter.initNotification(mContext, R.drawable.icon120120,mClazz);
+            NotificationMangerCenter.initNotification(mContext,mClazz);
         }
 
     }
