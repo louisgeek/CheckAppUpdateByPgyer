@@ -71,11 +71,11 @@ public class NotificationMangerCenter {
         //更新太频繁  进度会卡慢
         if (progress != mPogressTemp) {
             if (progress == 100) {
-                contentView.setTextViewText(R.id.content_view_text, "下载完成,点击安装");
+                contentView.setTextViewText(R.id.content_view_text, "新版本下载完成,点击安装");
                 contentView.setProgressBar(R.id.content_view_progress, 100, progress, false);
 
             } else {
-                contentView.setTextViewText(R.id.content_view_text, "下载中,已完成:" + progress + "%");
+                contentView.setTextViewText(R.id.content_view_text, "新版本下载中,已完成:" + progress + "%");
                 contentView.setProgressBar(R.id.content_view_progress, 100, progress, false);
 
             }
