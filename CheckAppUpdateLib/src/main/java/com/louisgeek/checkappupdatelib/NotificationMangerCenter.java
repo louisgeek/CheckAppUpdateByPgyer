@@ -21,6 +21,7 @@ public class NotificationMangerCenter {
     //通知栏显示所用到的布局文件
     private static RemoteViews contentView;
     private static int mPogressTemp;
+
     public static void initNotification(Context context, int iconResID, Class<?> clazz) {
         //定义一个PendingIntent点击Notification后启动一个Activity
         Intent intent = new Intent(context, clazz);
@@ -49,41 +50,41 @@ public class NotificationMangerCenter {
                 .setContentIntent(pendingIntent);
 
 
-        contentView= new RemoteViews(context.getPackageName(), R.layout.notification_content_layout);
+        contentView = new RemoteViews(context.getPackageName(), R.layout.notification_content_layout);
 
         //contentView.setIcon();
-        contentView.setImageViewResource(R.id.content_view_image,iconResID);
+        contentView.setImageViewResource(R.id.content_view_image, iconResID);
         //contentView.setImageViewBitmap(R.id.content_view_image, largeBitmap);
         //contentView.setBitmap();
 
         //一样 mBuilder.setCustomContentView(contentView);
         mBuilder.setContent(contentView);
 
-         notification = mBuilder.build();
-         notificationManager.notify(NOTIFYID_1, notification);
+        notification = mBuilder.build();
+        notificationManager.notify(NOTIFYID_1, notification);
     }
 
 
-    public static void  updateNotificationProgress(int progress){
+    public static void updateNotificationProgress(int progress) {
 
         //Log.i("progress", "updateNotificationProgress: progress:"+progress);
         //更新太频繁  进度会卡慢
-       if (progress!=mPogressTemp){
-           if(progress==100) {
-               contentView.setTextViewText(R.id.content_view_text,"下载完成,点击安装");
-               contentView.setProgressBar(R.id.content_view_progress,100,progress,false);
+        if (progress != mPogressTemp) {
+            if (progress == 100) {
+                contentView.setTextViewText(R.id.content_view_text, "下载完成,点击安装");
+                contentView.setProgressBar(R.id.content_view_progress, 100, progress, false);
 
-           } else{
-               contentView.setTextViewText(R.id.content_view_text,"下载中,已完成:"+progress+"%");
-               contentView.setProgressBar(R.id.content_view_progress,100,progress,false);
+            } else {
+                contentView.setTextViewText(R.id.content_view_text, "下载中,已完成:" + progress + "%");
+                contentView.setProgressBar(R.id.content_view_progress, 100, progress, false);
 
-               }
-           mBuilder.setContent(contentView);
-           notification = mBuilder.build();
-           notificationManager.notify(NOTIFYID_1, notification);
+            }
+            mBuilder.setContent(contentView);
+            notification = mBuilder.build();
+            notificationManager.notify(NOTIFYID_1, notification);
 
-           //
-           mPogressTemp=progress;
+            //
+            mPogressTemp = progress;
         }
     }
 }

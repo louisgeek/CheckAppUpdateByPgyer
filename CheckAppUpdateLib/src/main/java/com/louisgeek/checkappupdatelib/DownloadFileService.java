@@ -12,15 +12,15 @@ import com.louisgeek.checkappupdatelib.callback.DownloadApkCallBack;
 /**
  * Created by louisgeek on 2016/9/28.
  */
-public class DownloadFileService extends Service{
+public class DownloadFileService extends Service {
 
     private static final String TAG = "DownloadFileService";
 
-   /* public int getProgress() {
-        return mProgress;
-    }
+    /* public int getProgress() {
+         return mProgress;
+     }
 
-    private int mProgress;*/
+     private int mProgress;*/
     @Override
     public void onCreate() {
         super.onCreate();
@@ -52,7 +52,7 @@ public class DownloadFileService extends Service{
 
     private void doDownloadTing(Intent intent) {
         //
-        final String downloadAPKPathUrl=intent.getStringExtra("downloadAPKPathUrl");
+        final String downloadAPKPathUrl = intent.getStringExtra("downloadAPKPathUrl");
         Log.i(TAG, "onStartCommand: downloadAPKPathUrl");
         /**耗时操作必备*/
         new Thread(new Runnable() {
@@ -75,7 +75,7 @@ public class DownloadFileService extends Service{
                                                         myDialogFragmentProgress.dismiss();
                                                     }*/
                             final String apkPath = result;
-                            if (onDownLoadCompleteListener!=null){
+                            if (onDownLoadCompleteListener != null) {
                                 onDownLoadCompleteListener.onDownLoadComplete(apkPath);
                             }
 
@@ -100,8 +100,8 @@ public class DownloadFileService extends Service{
                      /*  if (myDialogFragmentProgress4Down != null) {
                            myDialogFragmentProgress4Down.updateProgress(progress);
                        }*/
-                      //  mProgress=progress;
-                        if (onBackProgressListener!=null){
+                        //  mProgress=progress;
+                        if (onBackProgressListener != null) {
                             onBackProgressListener.onBackProgress(progress);
                         }
                     }
@@ -124,32 +124,35 @@ public class DownloadFileService extends Service{
         Log.i(TAG, "onDestroy");
     }
 
-    private  DownloadFileBinder downloadFileBinder=new DownloadFileBinder();
-    public class  DownloadFileBinder extends Binder{
+    private DownloadFileBinder downloadFileBinder = new DownloadFileBinder();
+
+    public class DownloadFileBinder extends Binder {
 
         /**
          * 获取当前Service的实例
+         *
          * @return
          */
-        public DownloadFileService getNowService(){
+        public DownloadFileService getNowService() {
             return DownloadFileService.this;
         }
 
     }
 
-    public  interface  OnBackProgressListener{
-        void  onBackProgress(int progress);
+    public interface OnBackProgressListener {
+        void onBackProgress(int progress);
     }
 
     public void setOnBackProgressListener(OnBackProgressListener onBackProgressListener) {
         this.onBackProgressListener = onBackProgressListener;
     }
 
-    private  OnBackProgressListener onBackProgressListener;
+    private OnBackProgressListener onBackProgressListener;
 
-    public  interface  OnDownLoadCompleteListener{
-        void  onDownLoadComplete(String apkPath);
+    public interface OnDownLoadCompleteListener {
+        void onDownLoadComplete(String apkPath);
     }
+
     private OnDownLoadCompleteListener onDownLoadCompleteListener;
 
     public void setOnDownLoadCompleteListener(OnDownLoadCompleteListener onDownLoadCompleteListener) {

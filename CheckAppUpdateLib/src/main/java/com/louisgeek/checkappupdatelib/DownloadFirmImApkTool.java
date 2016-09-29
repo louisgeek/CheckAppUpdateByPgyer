@@ -206,8 +206,8 @@ public class DownloadFirmImApkTool {
     // 获得存储卡的路径  返回外部存储空间路径（可能是sd卡，也可能是内部存储器）
     private static String sd_path = Environment.getExternalStorageDirectory() + File.separator;
     private static String sd_path_2_way = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator;
-    private static String sd_path_3_way = Environment.getExternalStoragePublicDirectory("")+ File.separator;
-    private static String filePath =String.format("%sMyFileDir%sTest%s",sd_path,File.separator,File.separator);
+    private static String sd_path_3_way = Environment.getExternalStoragePublicDirectory("") + File.separator;
+    private static String filePath = String.format("%sMyFileDir%sTest%s", sd_path, File.separator, File.separator);
     private static String saveFileAllName = filePath + "app.apk";
 
     /**
@@ -224,11 +224,11 @@ public class DownloadFirmImApkTool {
          getDownloadApk: filePath:/storage/emulated/0/MyFileDir/Test/
          getDownloadApk: saveFileAllName:/storage/emulated/0/MyFileDir/Test/app.apk
          */
-        Log.i(TAG, "getDownloadApk: sd_path:"+sd_path);
-        Log.i(TAG, "getDownloadApk: sd_path_2_way:"+sd_path_2_way);
-        Log.i(TAG, "getDownloadApk: sd_path_3_way:"+sd_path_3_way);
-        Log.i(TAG, "getDownloadApk: filePath:"+filePath);
-        Log.i(TAG, "getDownloadApk: saveFileAllName:"+saveFileAllName);
+        Log.i(TAG, "getDownloadApk: sd_path:" + sd_path);
+        Log.i(TAG, "getDownloadApk: sd_path_2_way:" + sd_path_2_way);
+        Log.i(TAG, "getDownloadApk: sd_path_3_way:" + sd_path_3_way);
+        Log.i(TAG, "getDownloadApk: filePath:" + filePath);
+        Log.i(TAG, "getDownloadApk: saveFileAllName:" + saveFileAllName);
 
         String apkPath = "";
         InputStream inputStream = null;
@@ -262,7 +262,7 @@ public class DownloadFirmImApkTool {
 
             if (connection.getResponseCode() == 200) {
 
-                File file_dir  = new File(filePath);
+                File file_dir = new File(filePath);
                 // 判断文件目录是否存在
                 if (!file_dir.exists()) {
                     file_dir.mkdirs();
@@ -391,6 +391,7 @@ public class DownloadFirmImApkTool {
     }
 
     public static DownloadApkCallBack mDownloadApkCallBack;
+
     public static void doDownloadApk(final String pathurl, final DownloadApkCallBack downloadApkCallBack) {
         mDownloadApkCallBack = downloadApkCallBack;
         //

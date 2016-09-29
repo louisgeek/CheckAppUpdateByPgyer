@@ -20,7 +20,8 @@ public class MyDialogFragmentProgress4Down extends DialogFragment {
 
     private ProgressBar mProgressBar;
     private TextView id_my_message;
-    private Button  id_btn_hide_or_install;
+    private Button id_btn_hide_or_install;
+
     public static MyDialogFragmentProgress4Down newInstance(String title) {
         MyDialogFragmentProgress4Down myDialogFragment = new MyDialogFragmentProgress4Down();
         myDialogFragment.setCancelable(false);
@@ -57,9 +58,9 @@ public class MyDialogFragmentProgress4Down extends DialogFragment {
         });
 
         String title = getArguments().getString(TITLE_KEY);
-        if (title==null){
+        if (title == null) {
             this.getDialog().requestWindowFeature(Window.FEATURE_NO_TITLE);
-        }else{
+        } else {
             this.getDialog().setTitle(title);
         }
         //return super.onCreateView(inflater, container, savedInstanceState);
@@ -67,31 +68,32 @@ public class MyDialogFragmentProgress4Down extends DialogFragment {
     }
 
     public void updateProgress(int progress) {
-        if (mProgressBar!=null){
-        mProgressBar.setProgress(progress);}
+        if (mProgressBar != null) {
+            mProgressBar.setProgress(progress);
+        }
     }
 
 
     public void setMessageText(String messageText) {
-        if (id_my_message!=null){
+        if (id_my_message != null) {
             id_my_message.setText(messageText);
         }
     }
 
-    public void finishDownload(final FinishDownloadListener finishDownloadListener){
+    public void finishDownload(final FinishDownloadListener finishDownloadListener) {
         id_btn_hide_or_install.setText("点击安装");
         id_btn_hide_or_install.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 MyDialogFragmentProgress4Down.this.dismiss();
-                if (finishDownloadListener!=null){
+                if (finishDownloadListener != null) {
                     finishDownloadListener.finishDown();
                 }
             }
         });
     }
 
-    public interface FinishDownloadListener{
+    public interface FinishDownloadListener {
         void finishDown();
     }
 

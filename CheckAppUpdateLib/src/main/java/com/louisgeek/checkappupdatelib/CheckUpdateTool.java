@@ -38,14 +38,14 @@ public class CheckUpdateTool {
     private static String checkUpdateUrlByID = String.format(baseUrlByID, ID_STR, API_TOKEN);
     private static String checkUpdateUrlByPackageName = String.format(baseUrlByPackageName, packageName, API_TOKEN);
     private static FirImBean mFirImBean;
+
     /**
-     *
      * @param context
      * @param checkUpdateCallBack
      * @param onlyCheckReleaseVersion 单纯检测正式版的apk  not debug
      */
-    public static void doCheckOnline(final Context context, final CheckUpdateCallBack checkUpdateCallBack, final boolean onlyCheckReleaseVersion) {
-        Log.i(TAG, "doCheckOnline: 是否只检测正式版apk："+onlyCheckReleaseVersion);
+    public static void doCheckOnline(final Context context, final CheckUpdateCallBack checkUpdateCallBack, final boolean onlyCheckReleaseVersion, final boolean silentDownload) {
+        Log.i(TAG, "doCheckOnline: 是否只检测正式版apk：" + onlyCheckReleaseVersion);
         final Runnable runnable = new Runnable() {
             @Override
             public void run() {
@@ -61,7 +61,7 @@ public class CheckUpdateTool {
                             int versionCode = Integer.parseInt(mFirImBean.getVersion());
                             boolean isNeed = isNeedUpdate(context, versionCode, mFirImBean.getVersionShort());
                             String changelog = mFirImBean.getChangelog();
-                           // Log.i(TAG, "doCheckOnline: isNeed:" + isNeed);
+                            // Log.i(TAG, "doCheckOnline: isNeed:" + isNeed);
                             //
                             if (isNeed) {
                                 if (onlyCheckReleaseVersion) {
@@ -100,11 +100,11 @@ public class CheckUpdateTool {
                 final String finalMessage = message;
                 final int finalCode = code;
                 if (code > 0) {
-                    checkUpdateCallBack.OnSuccess(message, code,mFirImBean);
+                    checkUpdateCallBack.OnSuccess(message, code, mFirImBean, silentDownload);
                     ThreadUtil.runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            checkUpdateCallBack.OnSuccessNotifyUI(finalMessage, finalCode,mFirImBean);
+                            checkUpdateCallBack.OnSuccessNotifyUI(finalMessage, finalCode, mFirImBean, silentDownload);
                         }
                     });
                 } else {
