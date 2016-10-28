@@ -30,7 +30,7 @@ public class DownloadFirmImApkTool {
 
     private static final String TAG = "DownloadApkTool";
     private static String baseDownloadTokenUrl = "http://api.fir.im/apps/%s/download_token?api_token=%s";
-    private static String downloadTokenUrl = String.format(baseDownloadTokenUrl, CheckUpdateTool.ID_STR, CheckUpdateTool.API_TOKEN);
+    private static String downloadTokenUrl = String.format(baseDownloadTokenUrl, DownloadManagerCenter.ID_STR, DownloadManagerCenter.API_TOKEN);
 
     /**
      * http://fir.im/docs/install  第一步  接口

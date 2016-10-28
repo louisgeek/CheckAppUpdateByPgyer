@@ -19,6 +19,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 
+
 /**
  * Created by louisgeek on 2016/9/18.
  */
@@ -28,15 +29,12 @@ public class CheckUpdateTool {
     public static final int NEED_UPDATE_CODE = 11;
     public static final int NO_NEED_UPDATE_CODE = 10;
     public static final String TAG_RELEASE = "W3JlbGVhc2Vd";//[release]  base64  W3JlbGVhc2Vd
-    public final static String ID_STR = "xxxxxx";
-    public final static String API_TOKEN = "xxxxxxxxxxxxx";
     private static String baseUrlByID = "http://api.fir.im/apps/latest/%s?api_token=%s";
 
-    private static String packageName = "com.sunstar.cloudseeds";
     //使用 bundle_id / Package name 请求必填  type应用类型 ( ios / android )
     private static String baseUrlByPackageName = "http://api.fir.im/apps/latest/%s?api_token=%s&type=android";
-    private static String checkUpdateUrlByID = String.format(baseUrlByID, ID_STR, API_TOKEN);
-    private static String checkUpdateUrlByPackageName = String.format(baseUrlByPackageName, packageName, API_TOKEN);
+    private static String checkUpdateUrlByID = String.format(baseUrlByID, DownloadManagerCenter.ID_STR, DownloadManagerCenter.API_TOKEN);
+    private static String checkUpdateUrlByPackageName = String.format(baseUrlByPackageName, DownloadManagerCenter.mPackageName, DownloadManagerCenter.API_TOKEN);
     private static FirImBean mFirImBean;
 
     /**

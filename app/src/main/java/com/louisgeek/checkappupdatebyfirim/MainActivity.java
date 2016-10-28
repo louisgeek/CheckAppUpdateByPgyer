@@ -11,7 +11,9 @@ public class MainActivity extends AppCompatActivity {
 
     private static final String TAG = "MainActivity";
 
-
+    public final static String ID_STR = "xxxxxxxxxxxxxxxxxxx";
+    public final static String API_TOKEN = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";
+    private static String packageName = "com.sunstar.xxxxx";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,7 +24,8 @@ public class MainActivity extends AppCompatActivity {
         idbtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                DownloadManagerCenter.startDown(MainActivity.this,getSupportFragmentManager(),MainActivity.class,false);
+                DownloadManagerCenter.initApiConfig(ID_STR,API_TOKEN,packageName);
+                DownloadManagerCenter.startDown(MainActivity.this,false);
             }
         });
     }

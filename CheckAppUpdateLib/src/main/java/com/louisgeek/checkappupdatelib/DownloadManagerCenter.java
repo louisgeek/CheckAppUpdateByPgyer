@@ -106,7 +106,7 @@ public class DownloadManagerCenter {
                     Log.i(TAG, "OnSuccess: download_token:" + download_token);
 
                     String baseDownloadAPKUrlPath = "http://download.fir.im/apps/%s/install?download_token=%s";
-                    String downloadAPKPathUrl = String.format(baseDownloadAPKUrlPath, CheckUpdateTool.ID_STR, download_token);
+                    String downloadAPKPathUrl = String.format(baseDownloadAPKUrlPath, DownloadManagerCenter.ID_STR, download_token);
 
                     if (!SdCardTool.hasSDCardMounted()) {
                         Log.e(TAG, "OnSuccess:has NO SDCard Mounted");
@@ -224,5 +224,13 @@ public class DownloadManagerCenter {
             return;
         }
         mContext.unbindService(mServiceConnection);
+    }
+    public  static String ID_STR;
+    public  static String API_TOKEN;
+    public static String mPackageName;
+    public static void initApiConfig(String idStr, String apiToken, String appPackageName) {
+        ID_STR=idStr;
+        API_TOKEN=apiToken;
+        mPackageName=appPackageName;
     }
 }
