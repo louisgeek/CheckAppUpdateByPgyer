@@ -32,8 +32,14 @@ public class DownloadFileService extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         Log.i(TAG, "onBind");
+       String downloadAPKPathUrl= intent.getStringExtra("downloadAPKPathUrl");
+        boolean isPger= intent.getBooleanExtra("isPger",false);
+        if (isPger){
+            doDownloadTingByPgyer(downloadAPKPathUrl);
+        }else {
+            doDownloadTing(downloadAPKPathUrl);
+        }
 
-        doDownloadTing(intent);
 
         return downloadFileBinder;
     }
@@ -50,9 +56,9 @@ public class DownloadFileService extends Service {
         Log.i(TAG, "onRebind");
     }
 
-    private void doDownloadTing(Intent intent) {
+    private void doDownloadTing(final String downloadAPKPathUrl) {
         //
-        final String downloadAPKPathUrl = intent.getStringExtra("downloadAPKPathUrl");
+
         Log.i(TAG, "onStartCommand: downloadAPKPathUrl");
         /**耗时操作必备*/
         new Thread(new Runnable() {
@@ -111,7 +117,66 @@ public class DownloadFileService extends Service {
 
 
     }
+    private void doDownloadTingByPgyer(final String downloadAPKPathUrl) {
+        //
+        Log.i(TAG, "doDownloadTingByPgyer: downloadAPKPathUrl"+downloadAPKPathUrl);
+        /**耗时操作必备*/
+        new Thread(new Runnable() {
+            @Override
+            public void run() {
 
+                DownloadFirmImApkTool.doDownloadApk(downloadAPKPathUrl, new DownloadApkCallBack() {
+                    @Override
+                    public void OnSuccess(String result, int statusCode) {
+
+                    }
+
+                    @Override
+                    public void OnSuccessNotifyUI(String result, int statusCode) {
+                        if (statusCode == DownloadFirmImApkTool.DOWNLOAD_APK_SUCCESS_CODE) {
+                            //Toast.makeText(MainActivity.this, "下载完成", Toast.LENGTH_SHORT).show();
+                            Log.i(TAG, "OnSuccessNotifyUI: 下载完成");
+
+                                                    /*if (myDialogFragmentProgress != null) {
+                                                        myDialogFragmentProgress.dismiss();
+                                                    }*/
+                            final String apkPath = result;
+                            if (onDownLoadCompleteListener != null) {
+                                onDownLoadCompleteListener.onDownLoadComplete(apkPath);
+                            }
+
+                        }
+                    }
+
+                    @Override
+                    public void OnError(String errorMsg, int statusCode) {
+                        Log.i(TAG, "OnError: " + statusCode + ":" + errorMsg);
+                    }
+
+                    @Override
+                    public void OnErrorNotifyUI(String errorMsg, int statusCode) {
+                      /* if (myDialogFragmentProgress4Down != null) {
+                           myDialogFragmentProgress4Down.dismiss();
+                       }*/
+                        //Toast.makeText(MainActivity.this, statusCode + ":" + errorMsg, Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void OnProgressNotifyUI(int progress) {
+                     /*  if (myDialogFragmentProgress4Down != null) {
+                           myDialogFragmentProgress4Down.updateProgress(progress);
+                       }*/
+                        //  mProgress=progress;
+                        if (onBackProgressListener != null) {
+                            onBackProgressListener.onBackProgress(progress);
+                        }
+                    }
+                });
+            }
+        }).start();
+
+
+    }
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
         return super.onStartCommand(intent, flags, startId);

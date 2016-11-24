@@ -28,7 +28,6 @@ public class CheckUpdateTool {
     private static final String TAG = "CheckUpdateTool";
     public static final int NEED_UPDATE_CODE = 11;
     public static final int NO_NEED_UPDATE_CODE = 10;
-    public static final String TAG_RELEASE = "W3JlbGVhc2Vd";//[release]  base64  W3JlbGVhc2Vd
     private static String baseUrlByID = "http://api.fir.im/apps/latest/%s?api_token=%s";
 
     //使用 bundle_id / Package name 请求必填  type应用类型 ( ios / android )
@@ -63,7 +62,7 @@ public class CheckUpdateTool {
                             //
                             if (isNeed) {
                                 if (onlyCheckReleaseVersion) {
-                                    if (changelog.contains(TAG_RELEASE)) {
+                                    if (changelog.contains(DownloadManagerCenter.TAG_RELEASE)) {
                                         code = NEED_UPDATE_CODE;
                                         message = "需要更新";
                                         Log.i(TAG, "message3:正式版有更新");

@@ -10,10 +10,16 @@
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.louisgeek.checkappupdatebyfirim.MainActivity">
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_height="wrap_content"
+        android:text="静默更新ing"/>
     <Button
         android:id="@+id/id_btn"
         android:layout_width="wrap_content"
+        android:layout_centerInParent="true"
         android:layout_height="wrap_content"
-        android:text="检查更新"/>
+        android:text="go to about"/>
 
 </RelativeLayout>

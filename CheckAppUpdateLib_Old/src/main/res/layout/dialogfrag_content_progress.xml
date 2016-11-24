@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+
+    <TextView
+        android:id="@+id/id_my_message"
+        android:padding="15dp"
+        android:text="准备下载"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"/>
+
+
+   <ProgressBar
+       android:id="@+id/id_pb"
+       android:layout_width="300dp"
+       android:layout_gravity="center"
+       android:padding="10dp"
+       style="?android:attr/progressBarStyleHorizontal"
+       android:layout_height="wrap_content"/>
+
+
+    <Button
+        android:id="@+id/id_btn_hide_or_install"
+        android:text="后台下载"
+        android:paddingTop="5dp"
+        android:paddingBottom="5dp"
+        android:paddingLeft="15dp"
+        android:paddingRight="15dp"
+        android:textColor="@color/click_text_color"
+        android:background="@drawable/comm_text_click_selector"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="10dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
+
+</LinearLayout>

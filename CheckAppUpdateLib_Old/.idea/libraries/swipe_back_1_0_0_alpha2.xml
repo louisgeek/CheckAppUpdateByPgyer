@@ -1,0 +1,12 @@
+<component name="libraryTable">
+  <library name="swipe-back-1.0.0-alpha2">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../app/build/intermediates/exploded-aar/me.majiajie/swipe-back/1.0.0-alpha2/res" />
+      <root url="jar://$PROJECT_DIR$/../app/build/intermediates/exploded-aar/me.majiajie/swipe-back/1.0.0-alpha2/jars/classes.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/me.majiajie/swipe-back/1.0.0-alpha2/cf0d6c57fcf6b40137c0f91824b8a92968c4f9b0/swipe-back-1.0.0-alpha2-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>

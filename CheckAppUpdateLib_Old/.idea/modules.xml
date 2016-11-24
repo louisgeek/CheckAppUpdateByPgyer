@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/CheckAppUpdateLib.iml" filepath="$PROJECT_DIR$/CheckAppUpdateLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../CloudSeeds_Android_2.0.iml" filepath="$PROJECT_DIR$/../CloudSeeds_Android_2.0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../DropDownViewLib/DropDownViewLib.iml" filepath="$PROJECT_DIR$/../DropDownViewLib/DropDownViewLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../HttpLib/HttpLib.iml" filepath="$PROJECT_DIR$/../HttpLib/HttpLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../MultiEditTextViewLib/MultiEditTextViewLib.iml" filepath="$PROJECT_DIR$/../MultiEditTextViewLib/MultiEditTextViewLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../NumberPickerViewLib/NumberPickerViewLib.iml" filepath="$PROJECT_DIR$/../NumberPickerViewLib/NumberPickerViewLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../app/app.iml" filepath="$PROJECT_DIR$/../app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../cropper/cropper.iml" filepath="$PROJECT_DIR$/../cropper/cropper.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../pagerslidingtabstrip/pagerslidingtabstrip.iml" filepath="$PROJECT_DIR$/../pagerslidingtabstrip/pagerslidingtabstrip.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../photoview/photoview.iml" filepath="$PROJECT_DIR$/../photoview/photoview.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../umengpushlib/umengpushlib.iml" filepath="$PROJECT_DIR$/../umengpushlib/umengpushlib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../umengshare/umengshare.iml" filepath="$PROJECT_DIR$/../umengshare/umengshare.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../viewpageindicatorlib/viewpageindicatorlib.iml" filepath="$PROJECT_DIR$/../viewpageindicatorlib/viewpageindicatorlib.iml" />
+    </modules>
+  </component>
+</project>

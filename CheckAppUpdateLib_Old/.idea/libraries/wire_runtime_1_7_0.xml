@@ -1,0 +1,11 @@
+<component name="libraryTable">
+  <library name="wire-runtime-1.7.0">
+    <CLASSES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-runtime/1.7.0/99b61fbfbd9ae5d5309bb4a618e1f2d875821e2c/wire-runtime-1.7.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="jar://$USER_HOME$/.gradle/caches/modules-2/files-2.1/com.squareup.wire/wire-runtime/1.7.0/d139cb1807b1cce522d4cd7510589c57f7a08052/wire-runtime-1.7.0-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
