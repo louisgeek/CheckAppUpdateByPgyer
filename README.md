@@ -63,7 +63,8 @@ Use
 	......
     //normal  自动检测  提示下载  无更新不提示
     SimpleCheckUpdateTool.updateNormal_HasNoMsg(StartActivity.this,Pgyer.APP_ID,Pgyer.API_KEY);
-		}
+	}
+		
      @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -72,6 +73,11 @@ Use
 
 
 3、
-
+		
+		  @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+	......
     //simple 静默下载，提示安装
     SimpleCheckUpdateTool.updateSilentDown(StartActivity.this,Pgyer.APP_ID,Pgyer.API_KEY);
+     }
