@@ -136,7 +136,11 @@ public class UpdatePresenterImpl implements UpdateContract.Presenter {
         /**
          * 取消注册广播
          */
-        context.unregisterReceiver(mUserFaceBroadcastReceiver);
+        try{
+            context.unregisterReceiver(mUserFaceBroadcastReceiver);
+        }catch (Exception e){
+            e.printStackTrace();
+        }
     }
 
     private static MyDialogFragmentProgress4Down mMyDialogFragmentProgress4Down;

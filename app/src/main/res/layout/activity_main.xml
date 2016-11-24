@@ -14,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_centerHorizontal="true"
         android:layout_height="wrap_content"
-        android:text="静默更新ing"/>
+        android:text="静默更新ing,请确保Pgyer AppID/APiKey 在code替换"/>
     <Button
         android:id="@+id/id_btn"
         android:layout_width="wrap_content"

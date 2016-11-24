@@ -12,8 +12,8 @@ import com.louisgeek.checkappupdatelib.helper.CheckUpdateHelper;
 
 public class UpdateContract {
 
-/*    private static String PGYER_APP_ID = "d1e91f34eda39834a4d5903ed4f7c899";//应用App组ID
-    private static String PGYER_API_KEY = "c4adcf888e612b58a588c5431cde0ae4";//api_key*/
+/*    private static String PGYER_APP_ID = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";//应用App组ID
+    private static String PGYER_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";//api_key*/
 
     @Deprecated //不知道是不是真的是倒序  用getGroupInfo 判断返回字段 appIsLastest		是否是最新版（1:是; 2:否）
     private static String postAllVersionUrl = "http://www.pgyer.com/apiv1/app/builds";//POST
@@ -30,17 +30,17 @@ public class UpdateContract {
     @Deprecated
     private static String getAppInstall = "http://www.pgyer.com/apiv1/app/install";//GET
     /*
-    //demo http://www.pgyer.com/apiv1/app/install?_api_key=c4adcf888e612b58a588c5431cde0ae4&aKey=f3c7897cf8ac70a3d345699ef6e1584d
+    //demo http://www.pgyer.com/apiv1/app/install?_api_key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&aKey=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
         @Deprecated
        private static String getAppInstallUrl=String.format("%s?aKey=%s&_api_key=%s",getAppInstall,appKey,api_key);
     */
     /**
-     * 来自应用内API选项卡  like https://www.pgyer.com/manager/api/index/d1e91f34eda39834a4d5903ed4f7c899
+     * 来自应用内API选项卡  like https://www.pgyer.com/manager/api/index/xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
      * 区别是 这个api用aId （app组id） 上面用的是 aKey （app 唯一标识key） 为啥要分两个呢。。。搞不懂
      */
     private static String getAppInstallSimple = "http://www.pgyer.com/apiv1/app/install";//GET
-    //demo  https://www.pgyer.com/apiv1/app/install?aId=d1e91f34eda39834a4d5903ed4f7c899&_api_key=c4adcf888e612b58a588c5431cde0ae4
-    //or  http://www.pgyer.com/apiv1/app/install?aId=d1e91f34eda39834a4d5903ed4f7c899&_api_key=c4adcf888e612b58a588c5431cde0ae4
+    //demo  https://www.pgyer.com/apiv1/app/install?aId=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&_api_key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
+    //or  http://www.pgyer.com/apiv1/app/install?aId=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx&_api_key=xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
     public static String getAppInstallSimpleUrl = String.format("%s?aId=%s&_api_key=%s", getAppInstallSimple, CheckUpdateHelper.getAppId(), CheckUpdateHelper.getApiKey());
 
 
