@@ -13,6 +13,8 @@
 
 
 
+
+
 Add it in your root build.gradle at the end of repositories:
 
     allprojects {
@@ -54,10 +56,14 @@ Use
     }
 
 2、	
-
+		
+	  @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);	
+	......
     //normal  自动检测  提示下载  无更新不提示
     SimpleCheckUpdateTool.updateNormal_HasNoMsg(StartActivity.this,Pgyer.APP_ID,Pgyer.API_KEY);
-
+		}
      @Override
     protected void onDestroy() {
         super.onDestroy();
