@@ -11,7 +11,7 @@ import com.louisgeek.checkappupdatelib.helper.CheckUpdateHelper;
  */
 
 public class SimpleCheckUpdateTool {
-    public static void updateSilent(final FragmentActivity fragmentActivity, String app_id, String api_key) {
+    public static void updateSilentDown(final FragmentActivity fragmentActivity, String app_id, String api_key) {
         CheckUpdateHelper.initFirst(app_id, api_key);
         CheckUpdateHelper.checkUpdateSilent(fragmentActivity, new CheckUpdateHelper.CheckUpdateSilentCallBack() {
             @Override
@@ -20,7 +20,10 @@ public class SimpleCheckUpdateTool {
             }
         });
     }
-
+    public static void updateNormal_HasNoMsg(final FragmentActivity fragmentActivity, String app_id, String api_key) {
+        CheckUpdateHelper.initFirst(app_id, api_key);
+        CheckUpdateHelper.checkUpdate(fragmentActivity, null);
+    }
     public static void updateNormal(final FragmentActivity fragmentActivity, String app_id, String api_key) {
         CheckUpdateHelper.initFirst(app_id, api_key);
         CheckUpdateHelper.checkUpdate(fragmentActivity, new CheckUpdateHelper.CheckUpdateCallBack() {
