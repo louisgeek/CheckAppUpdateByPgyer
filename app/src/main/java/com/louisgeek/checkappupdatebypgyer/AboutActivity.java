@@ -4,13 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
-import com.louisgeek.checkappupdatelib.helper.CheckUpdateHelper;
+import com.louisgeek.checkappupdatelib.tool.SimpleCheckUpdateTool;
 
 public class AboutActivity extends AppCompatActivity {
-    private static String PGYER_APP_ID = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";//应用App组ID
-    private static String PGYER_API_KEY = "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx";//api_key
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,16 +21,9 @@ public class AboutActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 /**
-                 *
+                 * update
                  */
-                CheckUpdateHelper.checkUpdate(AboutActivity.this, new CheckUpdateHelper.CheckUpdateCallBack() {
-                    @Override
-                    public void backHasUpdate(boolean hasUpdate) {
-                        if (!hasUpdate) {
-                            Toast.makeText(AboutActivity.this, "当前已经是最新版本！", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-                });
+                SimpleCheckUpdateTool.updateNormal(AboutActivity.this, Pgyer.APP_ID, Pgyer.API_KEY);
             }
         });
     }
@@ -40,6 +31,6 @@ public class AboutActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        CheckUpdateHelper.unregisterCheckUpdate(this);
+        SimpleCheckUpdateTool.updateNormalUnregister(this);
     }
 }
