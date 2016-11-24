@@ -9,7 +9,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.louisgeek.checkappupdatebyfirim.AboutActivity">
+    tools:context="com.louisgeek.checkappupdatebypgyer.AboutActivity">
 
     <Button
         android:id="@+id/id_btn"

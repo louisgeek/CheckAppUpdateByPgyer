@@ -4,8 +4,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.support.v4.app.FragmentActivity;
 
-import com.louisgeek.checkappupdatelib.InfoHolderSingleton;
-import com.louisgeek.checkappupdatelib.MyDialogFragmentNormal;
+import com.louisgeek.checkappupdatelib.tool.InfoHolderSingleton;
+import com.louisgeek.checkappupdatelib.fragment.MyDialogFragmentNormal;
 import com.louisgeek.checkappupdatelib.bean.PgyerGroupBean;
 import com.louisgeek.checkappupdatelib.contract.UpdateContract;
 import com.louisgeek.checkappupdatelib.presenter.UpdatePresenterImpl;
@@ -72,9 +72,9 @@ public class CheckUpdateHelper {
     }
 
     public static void showApkIsInstallDialog(final FragmentActivity fragmentActivity, final PgyerGroupBean pgyerGroupBean, final String savedApkPath) {
-        MyDialogFragmentNormal myNo = MyDialogFragmentNormal.newInstance("新的安装包已经准备好,是否安装？", "V"+pgyerGroupBean.getAppVersion()+"更新日志：\n"
-                +pgyerGroupBean.getAppUpdateDescription());
-        myNo.setOnBtnClickListener(new MyDialogFragmentNormal.OnBtnClickListener() {
+        MyDialogFragmentNormal myDialogFragmentNormal = MyDialogFragmentNormal.newInstance("新的安装包已经准备好,是否安装？", "V" + pgyerGroupBean.getAppVersion() + "更新日志：\n"
+                + pgyerGroupBean.getAppUpdateDescription());
+        myDialogFragmentNormal.setOnBtnClickListener(new MyDialogFragmentNormal.OnBtnClickListener() {
             @Override
             public void onOkBtnClick(DialogInterface dialogInterface) {
                 AppTool.installApk(fragmentActivity, savedApkPath);
@@ -84,7 +84,12 @@ public class CheckUpdateHelper {
             public void onCancelBtnClick(DialogInterface dialogInterface) {
             }
         });
-        myNo.show(fragmentActivity.getSupportFragmentManager(), "myNo");
+        try {
+            myDialogFragmentNormal.show(fragmentActivity.getSupportFragmentManager(), "myNo");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
 
     public interface CheckUpdateCallBack {

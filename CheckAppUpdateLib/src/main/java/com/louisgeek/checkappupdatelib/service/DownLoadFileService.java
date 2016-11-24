@@ -15,7 +15,7 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.RemoteViews;
 
-import com.louisgeek.checkappupdatelib.InfoHolderSingleton;
+import com.louisgeek.checkappupdatelib.tool.InfoHolderSingleton;
 import com.louisgeek.checkappupdatelib.R;
 import com.louisgeek.checkappupdatelib.bean.PgyerGroupBean;
 import com.louisgeek.checkappupdatelib.contract.UpdateContract;

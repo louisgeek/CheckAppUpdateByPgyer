@@ -8,9 +8,9 @@ import android.content.IntentFilter;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
-import com.louisgeek.checkappupdatelib.InfoHolderSingleton;
-import com.louisgeek.checkappupdatelib.MyDialogFragmentNormal;
-import com.louisgeek.checkappupdatelib.MyDialogFragmentProgress4Down;
+import com.louisgeek.checkappupdatelib.tool.InfoHolderSingleton;
+import com.louisgeek.checkappupdatelib.fragment.MyDialogFragmentNormal;
+import com.louisgeek.checkappupdatelib.fragment.MyDialogFragmentProgress4Down;
 import com.louisgeek.checkappupdatelib.bean.PgyerBaseListBean;
 import com.louisgeek.checkappupdatelib.bean.PgyerGroupBean;
 import com.louisgeek.checkappupdatelib.contract.UpdateContract;

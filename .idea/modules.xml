@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/CheckAppUpdateByFirim.iml" filepath="$PROJECT_DIR$/CheckAppUpdateByFirim.iml" />
+      <module fileurl="file://$PROJECT_DIR$/CheckAppUpdateByPgyer.iml" filepath="$PROJECT_DIR$/CheckAppUpdateByPgyer.iml" />
       <module fileurl="file://$PROJECT_DIR$/CheckAppUpdateLib/CheckAppUpdateLib.iml" filepath="$PROJECT_DIR$/CheckAppUpdateLib/CheckAppUpdateLib.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
     </modules>
