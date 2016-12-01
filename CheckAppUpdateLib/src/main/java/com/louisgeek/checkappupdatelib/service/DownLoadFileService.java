@@ -33,6 +33,7 @@ public class DownLoadFileService extends Service {
 
     private static final String TAG = "DownLoadFileService";
     private boolean mIsSilentDownLoad = false;
+    private boolean mIsDownLoading = false;
 
     public static final String DOWNLOAD_SERVICE_ACTION_UPDATE_PROGRESS = "ACT_UPDATE_PROGRESS";
     public static final String DOWNLOAD_SERVICE_ACTION_UPDATE_FINISH = "ACT_UPDATE_FINISH";
@@ -73,25 +74,29 @@ public class DownLoadFileService extends Service {
     public int onStartCommand(Intent intent, int flags, int startId) {
 
         mIsSilentDownLoad = intent.getBooleanExtra("isSilentDownLoad", false);
-        /**
-         * 初始化前台服务通知
-         */
-        if (!mIsSilentDownLoad) {
-            initForegroundNotification();
+        if (!mIsDownLoading) {
+            /**
+             * 初始化前台服务通知
+             */
+            if (!mIsSilentDownLoad) {
+                initForegroundNotification();
+            }
+            initDownLoad();
         }
-        initDownLoad();
 
      //  return super.onStartCommand(intent, flags, startId);
        return Service.START_REDELIVER_INTENT;//重传Intent。使用这个返回值时，如果在执行完onStartCommand后，服务被异常kill掉，系统会自动重启该服务，并将Intent的值传入。
     }
 
     private void initDownLoad() {
+        mIsDownLoading=true;
         /**
          *下载
          */
         HttpTool.getUrlDownloadFile(UpdateContract.getAppInstallSimpleUrl, new HttpTool.OnUrlDownloadFileCallBack() {
             @Override
             public void onSuccess(String savedFilePath) {
+                mIsDownLoading=false;
                 Log.d(TAG, "onSuccess: savedFilePath;" + savedFilePath);
                 if (!mIsSilentDownLoad) {
                     Intent intent = new Intent(DOWNLOAD_SERVICE_ACTION_UPDATE_FINISH);
@@ -114,6 +119,7 @@ public class DownLoadFileService extends Service {
 
             @Override
             public void onError(String errorMsg) {
+                mIsDownLoading=false;
                 Log.d(TAG, "onError: errorMsg;" + errorMsg);
             }
 
