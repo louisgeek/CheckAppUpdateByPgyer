@@ -81,7 +81,8 @@ public class DownLoadFileService extends Service {
         }
         initDownLoad();
 
-        return super.onStartCommand(intent, flags, startId);
+     //  return super.onStartCommand(intent, flags, startId);
+       return Service.START_REDELIVER_INTENT;//重传Intent。使用这个返回值时，如果在执行完onStartCommand后，服务被异常kill掉，系统会自动重启该服务，并将Intent的值传入。
     }
 
     private void initDownLoad() {
@@ -136,6 +137,7 @@ public class DownLoadFileService extends Service {
     @Override
     public void onDestroy() {
         super.onDestroy();
+        Log.d(TAG, "onDestroy: service XXSS");
         /**
          * 取消注册广播
          */

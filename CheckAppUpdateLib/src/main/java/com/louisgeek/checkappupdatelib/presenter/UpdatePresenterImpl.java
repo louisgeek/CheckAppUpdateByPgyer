@@ -28,7 +28,7 @@ public class UpdatePresenterImpl implements UpdateContract.Presenter {
     private UpdateContract.Model mModel = new UpdateModelImpl();
 
     private UpdateContract.View mView;
-
+    private static final String TAG = "UpdatePresenterImpl";
 
     public UpdatePresenterImpl(UpdateContract.View view) {
         mView = view;
@@ -139,7 +139,14 @@ public class UpdatePresenterImpl implements UpdateContract.Presenter {
         try{
             context.unregisterReceiver(mUserFaceBroadcastReceiver);
         }catch (Exception e){
-            e.printStackTrace();
+           // e.printStackTrace();
+            Log.w(TAG, "unregisterMayOnDestroy: unregisterReceiver"+e.getMessage());
+        }
+        try{
+            context.stopService(mStartDownLoadFileServiceIntent);
+        }catch (Exception e){
+           // e.printStackTrace();
+            Log.w(TAG, "unregisterMayOnDestroy: stopService"+e.getMessage());
         }
     }
 
@@ -165,11 +172,11 @@ public class UpdatePresenterImpl implements UpdateContract.Presenter {
             }
         });
     }
-
+    private static Intent mStartDownLoadFileServiceIntent;
     private static void startDownloadService(Context context, boolean isSilentDownLoad) {
-        Intent starter = new Intent(context, DownLoadFileService.class);
-        starter.putExtra("isSilentDownLoad", isSilentDownLoad);
-        context.startService(starter);
+        mStartDownLoadFileServiceIntent = new Intent(context, DownLoadFileService.class);
+        mStartDownLoadFileServiceIntent.putExtra("isSilentDownLoad", isSilentDownLoad);
+        context.startService(mStartDownLoadFileServiceIntent);
     }
 
     private PgyerGroupBean findLastVer(PgyerBaseListBean<PgyerGroupBean> data) {
